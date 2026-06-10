@@ -25,6 +25,9 @@ subprojects {
 
     dependencies {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
     }
 
     test {
