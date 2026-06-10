@@ -1,11 +1,13 @@
-package com.openitsm.application.controller;
+package com.openitsm.incident.controller;
 
+import com.openitsm.incident.domain.Incident;
 import com.openitsm.incident.service.IncidentService;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/incidents")
 public class IncidentController {
 
     private final IncidentService service;
@@ -14,4 +16,8 @@ public class IncidentController {
         this.service = service;
     }
 
+    @GetMapping("/api/incidents")
+    public List<Incident> findAll() {
+        return service.findAll();
+    }
 }

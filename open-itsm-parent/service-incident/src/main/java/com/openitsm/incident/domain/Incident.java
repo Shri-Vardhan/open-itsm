@@ -1,36 +1,25 @@
 package com.openitsm.incident.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "INCIDENT")
 public class Incident {
 
-    @Id
-    @Column(name = "INCIDENT_ID", length = 30)
-    private String id;
-
-    @Column(name = "INCIDENT_TITLE", nullable = false, length = 255)
+    private Long id;
     private String title;
-
-    @Lob
-    @Column(name = "INCIDENT_DESCRIPTION")
     private String description;
 
-    // Default Constructor
     public Incident() {
     }
 
-    // Getters and Setters
-    public String getId() {
+    public Incident(Long id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

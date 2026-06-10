@@ -1,3 +1,11 @@
 plugins {
-    id 'java-library'
+    id 'java-library' // this is correct (not a spring boot application like in application module)
+    id 'io.spring.dependency-management'
+}
+
+dependencies {
+    implementation project(':common')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }

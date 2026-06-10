@@ -1,7 +1,10 @@
 package com.openitsm.incident.service;
 
+import com.openitsm.incident.domain.Incident;
 import com.openitsm.incident.repository.IncidentRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class IncidentService {
@@ -12,5 +15,7 @@ public class IncidentService {
         this.repository = repository;
     }
 
+    public List<Incident> findAll() {
+        return repository.findAll();
+    }
 }
-
