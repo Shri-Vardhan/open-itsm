@@ -9,6 +9,7 @@ dependencies {
     implementation project(':service-user')
 
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'com.oracle.database.jdbc:ojdbc11:23.3.0.23.09'
 }
 

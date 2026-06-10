@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '4.0.1' apply false
-    id 'io.spring.dependency-management' version '1.1.6' apply false
+    id 'org.springframework.boot' version '3.3.5' apply false
+    id 'io.spring.dependency-management' version '1.1.6'
 }
 
 group = 'com.openitsm'
@@ -21,13 +21,13 @@ subprojects {
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(25)
+            languageVersion = JavaLanguageVersion.of(21)
         }
     }
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:4.0.1"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:3.3.5"
         }
     }
 
