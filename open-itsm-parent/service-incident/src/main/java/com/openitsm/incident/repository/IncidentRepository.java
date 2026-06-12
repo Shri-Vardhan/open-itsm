@@ -1,35 +1,21 @@
 package com.openitsm.incident.repository;
 
 import com.openitsm.incident.domain.Incident;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
-public class IncidentRepository {
+public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
-    private final JdbcTemplate jdbcTemplate;
+    /* NATIVE SQL QUERY CALLED FROM findAll IN SERVICE LAYER, so you dont have to write below query
+    @Query(
+            value = "SELECT INCIDENT_ID, INCIDENT_TITLE, INCIDENT_DESCRIPTION " +
+                    "FROM ITSM_INCIDENT ORDER BY INCIDENT_ID",
+            nativeQuery = true
+    )
+    List<Incident> findAllIncidents();
+    */
 
-    public IncidentRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-    public List<Incident> findAll() {
-        String sql = """
-            SELECT INCIDENT_ID,
-                   INCIDENT_TITLE,
-                   INCIDENT_DESCRIPTION
-            FROM ITSM_INCIDENT
-            ORDER BY INCIDENT_ID
-            """;
-
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            Incident incident = new Incident();
-            incident.setId(rs.getLong("INCIDENT_ID"));
-            incident.setTitle(rs.getString("INCIDENT_TITLE"));
-            incident.setDescription(rs.getString("INCIDENT_DESCRIPTION"));
-            return incident;
-        });
-    }
+    List<Incident> findAll();
 }

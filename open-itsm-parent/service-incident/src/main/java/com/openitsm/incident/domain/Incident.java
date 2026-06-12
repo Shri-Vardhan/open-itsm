@@ -1,9 +1,19 @@
 package com.openitsm.incident.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "ITSM_INCIDENT")
 public class Incident {
 
+    @Id
+    @Column(name = "INCIDENT_ID")
     private Long id;
+
+    @Column(name = "INCIDENT_TITLE")
     private String title;
+
+    @Column(name = "INCIDENT_DESCRIPTION")
     private String description;
 
     public Incident() {
