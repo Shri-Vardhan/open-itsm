@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: prod_user
+    password: prod_pass
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # creates/updates table automatically
+    show-sql: true       # prints SQL in console
+    database-platform: org.hibernate.dialect.OracleDialect

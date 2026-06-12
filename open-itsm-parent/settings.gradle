@@ -1,0 +1,6 @@
+rootProject.name = 'open-itsm-parent'
+include 'application'
+include 'service-incident'
+include 'service-problem'
+include 'common'
+include 'service-user'
