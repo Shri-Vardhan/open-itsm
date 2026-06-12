@@ -39,8 +39,6 @@ Handles authentication, authorization, and role-based access control.
 
 ## System Architecture
 
-The application follows a modular, layered architecture:
-
 ### High-Level Architecture Flow
 
 Client (UI / API Consumer)
