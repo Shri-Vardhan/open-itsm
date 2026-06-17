@@ -5,4 +5,5 @@ plugins {
 
 dependencies {
     implementation project(':common')
+    implementation 'org.apache.logging.log4j:log4j-api'
 }

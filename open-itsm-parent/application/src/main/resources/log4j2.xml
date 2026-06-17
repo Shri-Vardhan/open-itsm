@@ -29,13 +29,14 @@
         <Logger name="org.springframework" level="INFO"/>
 
         <!-- Your application logs -->
-        <Logger name="com.shrivardhan.springboot" level="DEBUG" additivity="false">
+        <Logger name="com.openitsm.application" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="FileLogger"/>
         </Logger>
 
-        <Root level="INFO">
+        <Root level="DEBUG">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
         </Root>
 
     </Loggers>
