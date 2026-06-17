@@ -2,15 +2,11 @@ plugins {
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
 }
-
 configurations.all {
-    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    exclude group: 'org.springframework.boot',
+            module: 'spring-boot-starter-logging'
 }
-
 dependencies {
-    // Spring Boot Core (exclude default logging)
-
-
     implementation project(':service-incident')
     implementation project(':service-problem')
     implementation project(':service-user')
