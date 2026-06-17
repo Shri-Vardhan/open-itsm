@@ -36,21 +36,3 @@ Manages controlled changes in IT systems and infrastructure.
 Handles authentication, authorization, and role-based access control.
 
 ---
-
-## System Architecture
-
-### High-Level Architecture Flow
-
-Client (UI / API Consumer)
-|
-v
-Controller Layer (Application Module)
-|
-v
-Service Layer (Business Logic)
-|
-v
-Repository Layer (Data Access)
-|
-v
-Database (Relational DB via JPA/Hibernate)
