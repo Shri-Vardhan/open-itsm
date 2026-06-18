@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
-    /* NATIVE SQL QUERY CALLED FROM findAll IN SERVICE LAYER, so you dont have to write below query
+    /* You dont have to write below query : (NATIVE SQL QUERY CALLED FROM findAll IN SERVICE LAYER)
     @Query(
             value = "SELECT INCIDENT_ID, INCIDENT_TITLE, INCIDENT_DESCRIPTION " +
                     "FROM ITSM_INCIDENT ORDER BY INCIDENT_ID",
