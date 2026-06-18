@@ -6,7 +6,7 @@ public class AppUser {
     private String username;
     private String password;
     private String role;
-    private boolean enabled;
+    private String enabled;
 
     public Long getId() {
         return id;
@@ -40,11 +40,15 @@ public class AppUser {
         this.role = role;
     }
 
-    public boolean isEnabled() {
+    public String getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(String enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isEnabledFlag() {
+        return "Y".equalsIgnoreCase(enabled);
     }
 }

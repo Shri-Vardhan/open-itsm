@@ -3,6 +3,7 @@ package com.openitsm.incident.repository;
 import com.openitsm.incident.domain.Incident;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
