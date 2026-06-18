@@ -13,7 +13,7 @@ import java.util.List;
 public class IncidentController {
 
     private final IncidentService service;
-    private static final Logger logger = LogManager.getLogger(IncidentController.class);
+    private static final Logger log = LogManager.getLogger(IncidentController.class);
 
     public IncidentController(IncidentService service) {
         this.service = service;
@@ -21,7 +21,7 @@ public class IncidentController {
 
     @GetMapping("/api/incidents")
     public List<Incident> findAll() {
-        logger.debug("Retrieving all incidents");
+        log.debug("Retrieving all incidents");
         return service.findAll();
     }
 }

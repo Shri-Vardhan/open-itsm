@@ -2,7 +2,6 @@
 <Configuration status="WARN">
 
     <Appenders>
-
         <Console name="Console"
                  target="SYSTEM_OUT">
             <PatternLayout
@@ -12,39 +11,30 @@
         <RollingFile name="FileLogger"
                      fileName="logs/application.log"
                      filePattern="logs/application-%d{yyyy-MM-dd}.log">
-
             <PatternLayout
                     pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level %c{1} - %msg%n"/>
-
             <Policies>
                 <TimeBasedTriggeringPolicy/>
             </Policies>
-
         </RollingFile>
-
     </Appenders>
 
     <Loggers>
-
         <Logger name="com.openitsm"
                 level="DEBUG"
                 additivity="false">
 
             <AppenderRef ref="Console"/>
             <AppenderRef ref="FileLogger"/>
-
         </Logger>
 
         <Logger name="org.springframework.security"
                 level="DEBUG"/>
 
         <Root level="INFO">
-
             <AppenderRef ref="Console"/>
             <AppenderRef ref="FileLogger"/>
-
         </Root>
-
     </Loggers>
 
 </Configuration>

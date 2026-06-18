@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
 
-    private static final Logger logger = LogManager.getLogger(LoginController.class);
+    private static final Logger log = LogManager.getLogger(LoginController.class);
 
     @GetMapping("/login")
     public String loginPage() {
-
-        logger.debug("Displaying login page");
-
+        log.debug("Displaying login page");
         return "login/login";
     }
 }

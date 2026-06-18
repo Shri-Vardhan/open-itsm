@@ -1,12 +1,11 @@
 package com.openitsm.incident.service;
 
-import com.openitsm.incident.domain.Incident;
-import com.openitsm.incident.repository.IncidentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import com.openitsm.incident.domain.Incident;
+import com.openitsm.incident.repository.IncidentRepository;
 
 @Service
 public class IncidentService {

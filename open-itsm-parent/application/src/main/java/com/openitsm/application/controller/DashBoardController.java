@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashBoardController {
 
-    private static final Logger logger = LogManager.getLogger(DashBoardController.class);
+    private static final Logger log = LogManager.getLogger(DashBoardController.class);
 
     @GetMapping("/dashboard")
     public String dashboard() {
-
-        logger.info("Dashboard accessed");
-
+        log.debug("Dashboard accessed");
         return "dashboard/dashboard";
     }
 }
