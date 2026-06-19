@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController {
+public class LoginController_UI {
 
-    private static final Logger log = LogManager.getLogger(LoginController.class);
+    private static final Logger log = LogManager.getLogger(LoginController_UI.class);
 
     @GetMapping("/login")
     public String loginPage() {

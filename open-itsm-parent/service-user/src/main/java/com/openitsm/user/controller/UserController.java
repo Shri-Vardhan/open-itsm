@@ -11,8 +11,7 @@ import com.openitsm.user.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-    private static final Logger logger =
-            LogManager.getLogger(UserController.class);
+    private static final Logger logger = LogManager.getLogger(UserController.class);
 
     private final UserService userService;
 
@@ -22,17 +21,18 @@ public class UserController {
 
     @GetMapping("/create-form")
     public String createForm() {
-        logger.info("Loading Create User page");
+        logger.info(
+                "Loading Create User page");
         return "user/create-user";
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute AppUser user) {
+    public String createUser(
+            @ModelAttribute AppUser user) {
         userService.createUser(
                 user.getUsername(),
                 user.getPassword(),
-                user.getRole()
-        );
+                user.getRole());
         return "redirect:/login";
     }
 }

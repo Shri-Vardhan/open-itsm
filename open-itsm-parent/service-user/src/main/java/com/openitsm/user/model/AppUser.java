@@ -1,11 +1,33 @@
 package com.openitsm.user.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "USERS")
 public class AppUser {
 
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_seq")
+    @SequenceGenerator(
+            name = "user_seq",
+            sequenceName = "USER_SEQ",
+            allocationSize = 1)
+
+    @Column(name = "USER_ID")
     private Long id;
+
+    @Column(name = "USERNAME", nullable = false, unique = true)
     private String username;
+
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
+
+    @Column(name = "ROLE", nullable = false)
     private String role;
+
+    @Column(name = "ENABLED")
     private String enabled;
 
     public Long getId() {
