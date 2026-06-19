@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.openitsm.user.model.AppUser;
 import com.openitsm.user.repository.UserRepository;
 
@@ -23,22 +24,23 @@ public class UserService {
     }
 
     public void createUser(String username, String password, String role) {
+
         log.info("Creating user: {}", username);
 
         repository.findByUsername(username)
                 .ifPresent(u -> {
-                    log.warn("User already exists: {}", username);
                     throw new RuntimeException("User already exists");
                 });
 
         AppUser user = new AppUser();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole(role);
+
+        // FIXED ROLE FORMAT
+        user.setRole("ROLE_" + role);
+
         user.setEnabled("Y");
 
         repository.save(user);
-
-        log.info("User saved successfully: {}", username);
     }
 }

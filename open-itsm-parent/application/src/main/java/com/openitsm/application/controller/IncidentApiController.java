@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class IncidentController_API {
+public class IncidentApiController {
 
     private final IncidentService service;
-    private static final Logger log = LogManager.getLogger(IncidentController_API.class);
+    private static final Logger log = LogManager.getLogger(IncidentApiController.class);
 
-    public IncidentController_API(IncidentService service) {
+    public IncidentApiController(IncidentService service) {
         this.service = service;
     }
 

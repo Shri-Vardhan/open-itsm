@@ -1,7 +1,7 @@
 package com.openitsm.incident.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.openitsm.incident.domain.Incident;
@@ -11,7 +11,8 @@ import com.openitsm.incident.repository.IncidentRepository;
 public class IncidentService {
 
     private final IncidentRepository repository;
-    private static final Logger logger = LoggerFactory.getLogger(IncidentService.class);
+    private static final Logger log =
+            LogManager.getLogger(IncidentService.class);
 
     public IncidentService(IncidentRepository repository) {
         this.repository = repository;
@@ -24,7 +25,7 @@ public class IncidentService {
     */
 
     public List<Incident> findAll() {
-        logger.debug("Fetching incidents from repository");
+        log.debug("Fetching incidents from repository");
         return repository.findAll();
     }
 }

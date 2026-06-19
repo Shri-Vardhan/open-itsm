@@ -9,30 +9,29 @@ import com.openitsm.user.service.UserService;
 
 @Controller
 @RequestMapping("/users")
-public class UserController {
+public class UserAdminController {
 
-    private static final Logger logger = LogManager.getLogger(UserController.class);
+    private static final Logger logger = LogManager.getLogger(UserAdminController.class);
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserAdminController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/create-form")
     public String createForm() {
-        logger.info(
-                "Loading Create User page");
+        logger.info("User create form requested");
         return "user/create-user";
     }
 
     @PostMapping("/create")
-    public String createUser(
-            @ModelAttribute AppUser user) {
+    public String createUser(@ModelAttribute AppUser user) {
         userService.createUser(
                 user.getUsername(),
                 user.getPassword(),
-                user.getRole());
-        return "redirect:/login";
+                user.getRole()
+        );
+        return "redirect:/user/login";
     }
 }

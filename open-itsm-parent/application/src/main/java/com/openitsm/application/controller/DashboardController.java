@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class DashBoardController_UI {
+public class DashboardController {
 
-    private static final Logger log = LogManager.getLogger(DashBoardController_UI.class);
+    private static final Logger log = LogManager.getLogger(DashboardController.class);
 
     @GetMapping("/dashboard")
     public String dashboard() {

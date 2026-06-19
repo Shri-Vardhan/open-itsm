@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController_UI {
+public class UserLoginController {
 
-    private static final Logger log = LogManager.getLogger(LoginController_UI.class);
+    private static final Logger log = LogManager.getLogger(UserLoginController.class);
 
-    @GetMapping("/login")
-    public String loginPage() {
-        log.debug("Displaying login page");
-        return "login/login";
+    @GetMapping("/user/login")
+    public String login() {
+        log.debug("Login page requested");
+        return "login/userLogin";
     }
 }

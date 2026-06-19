@@ -68,11 +68,11 @@
 
 <div class="sidebar">
 
-    <a href="/dashboard">Home</a>
+    <a th:href="@{/dashboard}">Home</a>
 
-    <a href="/incidents">View Incidents</a>
+    <a th:href="@{/incidents}">View Incidents</a>
 
-    <a href="/users/create-form">Create User</a>
+    <a th:href="@{/users/create-form}">Create User</a>
 
     <!-- Logout -->
     <form th:action="@{/logout}" method="post" style="margin:0;">

@@ -1,11 +1,12 @@
 spring:
   datasource:
+    url: jdbc:oracle:thin:@//192.168.0.120:1521/ORCLPDB
     username: vnrvjiet
     password: vnr
     driver-class-name: oracle.jdbc.OracleDriver
 
   jpa:
     hibernate:
-      ddl-auto: update   # creates/updates table automatically
-    show-sql: true       # prints SQL in console
+      ddl-auto: none
+    show-sql: true
     database-platform: org.hibernate.dialect.OracleDialect
