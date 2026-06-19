@@ -1,54 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dashboard</title>
 
     <style>
+
         body {
             margin: 0;
-            padding: 40px;
-            background: #f4f6f9;
             font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f6f9;
             color: #2f3b52;
-            text-align: center;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #2f3b52;
+            height: 100vh;
+            padding-top: 20px;
+        }
+
+        .sidebar a,
+        .sidebar button {
+            display: block;
+            width: 100%;
+            color: white;
+            text-decoration: none;
+            padding: 12px 16px;
+            font-weight: 600;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .sidebar a:hover,
+        .sidebar button:hover {
+            background: #1f2d3d;
+        }
+
+        .content {
+            flex: 1;
+            padding: 30px;
         }
 
         h1 {
-            font-size: 26px;
-            font-weight: 600;
             color: #1f2d3d;
-            margin-bottom: 25px;
-        }
-
-        a {
-            display: inline-block;
-            background: #0066cc;
-            color: white;
-            text-decoration: none;
-            padding: 10px 24px;
-            border-radius: 3px;
-            font-size: 14px;
             font-weight: 600;
-            transition: background 0.2s;
+            margin-bottom: 20px;
         }
 
-        a:hover {
-            background: #0052a3;
+        .card {
+            background: #ffffff;
+            border: 1px solid #d8dde6;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            padding: 30px;
+            max-width: 600px;
         }
 
-        a:active {
-            background: #004080;
-        }
     </style>
 </head>
 
 <body>
 
-<h1>Welcome To OpenITSM</h1>
+<div class="sidebar">
 
-<a href="/logout">
-    Logout
-</a>
+    <a href="/dashboard">Home</a>
+
+    <a href="/incidents">View Incidents</a>
+
+    <a href="/users/create-form">Create User</a>
+
+    <!-- Logout -->
+    <form th:action="@{/logout}" method="post" style="margin:0;">
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}" />
+
+        <button type="submit">
+            Logout
+        </button>
+    </form>
+
+</div>
+
+<div class="content">
+
+    <h1>Dashboard</h1>
+
+    <div class="card">
+        Welcome to OpenITSM Dashboard
+    </div>
+
+</div>
 
 </body>
 </html>
