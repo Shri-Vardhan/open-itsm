@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Incidents</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="card" style="width:800px;margin:40px auto;">
+
+  <h2>Incidents</h2>
+
+  <table border="1" width="100%">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+    </tr>
+
+    <tr th:each="incident : ${incidents}">
+      <td th:text="${incident.id}"></td>
+      <td th:text="${incident.title}"></td>
+      <td th:text="${incident.description}"></td>
+    </tr>
+  </table>
+
+</div>
+
+</body>
+</html>

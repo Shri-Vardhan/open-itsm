@@ -7,6 +7,6 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update   # creates/updates table automatically
-    show-sql: true       # prints SQL in console
+      ddl-auto: none
+    show-sql: true
     database-platform: org.hibernate.dialect.OracleDialect

@@ -13,6 +13,7 @@ public class Incident {
     @Column(name = "INCIDENT_TITLE")
     private String title;
 
+    @Lob
     @Column(name = "INCIDENT_DESCRIPTION")
     private String description;
 
