@@ -2,26 +2,22 @@ package com.openitsm.application.controller;
 
 import com.openitsm.incident.domain.Incident;
 import com.openitsm.incident.service.IncidentService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class IncidentApiController {
 
     private final IncidentService service;
-    private static final Logger log = LogManager.getLogger(IncidentApiController.class);
 
     public IncidentApiController(IncidentService service) {
         this.service = service;
     }
 
-    @GetMapping("/api/incidents")
+    @GetMapping("/incidents")
     public List<Incident> findAll() {
-        log.debug("Retrieving all incidents");
         return service.findAll();
     }
 }

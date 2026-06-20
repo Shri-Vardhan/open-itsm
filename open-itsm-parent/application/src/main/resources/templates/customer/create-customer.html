@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Customer</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="center">
+
+<div class="card">
+
+    <h2>Create Customer</h2>
+
+    <form action="/admin/customers/create" method="post">
+
+        <input type="text" name="username" placeholder="Username" />
+
+        <input type="password" name="password" placeholder="Password" />
+
+        <button type="submit">Create Customer</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
