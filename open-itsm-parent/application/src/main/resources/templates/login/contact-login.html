@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contact Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="center">
+
+<div class="card">
+
+    <h2>Contact Login</h2>
+
+    <form method="post"
+          th:action="@{/contact/process-login}">
+
+        <input type="text"
+               name="username"
+               placeholder="Username">
+
+        <input type="password"
+               name="password"
+               placeholder="Password">
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

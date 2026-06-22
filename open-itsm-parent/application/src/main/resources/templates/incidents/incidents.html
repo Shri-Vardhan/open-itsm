@@ -7,11 +7,19 @@
 
 <body>
 
-<div class="card" style="width:800px;margin:40px auto;">
+<div class="card"
+     style="width:800px;margin:40px auto;">
 
   <h2>Incidents</h2>
 
+  <a th:href="@{/user/dashboard}">
+    Back to Dashboard
+  </a>
+
+  <br><br>
+
   <table border="1" width="100%">
+
     <tr>
       <th>ID</th>
       <th>Title</th>
@@ -19,10 +27,15 @@
     </tr>
 
     <tr th:each="incident : ${incidents}">
+
       <td th:text="${incident.id}"></td>
+
       <td th:text="${incident.title}"></td>
+
       <td th:text="${incident.description}"></td>
+
     </tr>
+
   </table>
 
 </div>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Contact</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="center">
+
+<div class="card">
+
+    <h2>Create Contact</h2>
+
+    <form method="post"
+          th:action="@{/user/contacts/create}">
+
+        <input type="text"
+               name="username"
+               placeholder="Username"/>
+
+        <input type="password"
+               name="password"
+               placeholder="Password"/>
+
+        <button type="submit">
+            Create Contact
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

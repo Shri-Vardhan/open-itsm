@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="card"
+     style="width:700px;margin:40px auto;">
+
+    <h1>User Dashboard</h1>
+
+    <div>
+
+        <a th:href="@{/user/dashboard}">
+            Home
+        </a>
+
+        <a th:href="@{/user/incidents}">
+            Incidents
+        </a>
+
+        <a th:href="@{/user/users/create-form}">
+            Create User
+        </a>
+
+        <a th:href="@{/user/contacts/create-form}">
+            Create Contact
+        </a>
+
+    </div>
+
+    <br>
+
+    <form th:action="@{/user/logout}"
+          method="post">
+
+        <button type="submit">
+            Logout
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
