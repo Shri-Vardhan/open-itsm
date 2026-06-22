@@ -1,4 +1,4 @@
-package com.openitsm.application.controller;
+package com.openitsm.incident.controller;
 
 import com.openitsm.incident.domain.Incident;
 import com.openitsm.incident.service.IncidentService;

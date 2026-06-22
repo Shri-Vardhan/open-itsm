@@ -1,4 +1,4 @@
-package com.openitsm.user.controller;
+package com.openitsm.incident.controller;
 
 import com.openitsm.incident.service.IncidentService;
 import org.springframework.stereotype.Controller;

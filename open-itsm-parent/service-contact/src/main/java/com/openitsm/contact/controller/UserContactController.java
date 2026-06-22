@@ -1,4 +1,4 @@
-package com.openitsm.user.controller;
+package com.openitsm.contact.controller;
 
 import com.openitsm.contact.service.ContactService;
 import org.springframework.stereotype.Controller;
