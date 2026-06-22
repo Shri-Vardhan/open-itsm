@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contact Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="card"
+     style="width:600px;margin:40px auto;">
+
+    <h1>Contact Dashboard</h1>
+
+    <a th:href="@{/contact/dashboard}">
+        Home
+    </a>
+
+    <form th:action="@{/contact/logout}"
+          method="post">
+
+        <button type="submit">
+            Logout
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

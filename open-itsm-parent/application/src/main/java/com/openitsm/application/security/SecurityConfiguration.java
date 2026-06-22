@@ -1,7 +1,7 @@
 package com.openitsm.application.security;
 
-import com.openitsm.admin.service.AdminUserDetailsService;
-import com.openitsm.customer.service.CustomerUserDetailsService;
+import com.openitsm.user.service.UserDetailsServiceImpl;
+import com.openitsm.contact.service.ContactUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -15,13 +15,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
-    private final AdminUserDetailsService adminUserDetailsService;
-    private final CustomerUserDetailsService customerUserDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
+    private final ContactUserDetailsService contactUserDetailsService;
 
-    public SecurityConfiguration(AdminUserDetailsService adminUserDetailsService,
-                                 CustomerUserDetailsService customerUserDetailsService) {
-        this.adminUserDetailsService = adminUserDetailsService;
-        this.customerUserDetailsService = customerUserDetailsService;
+    public SecurityConfiguration(
+            UserDetailsServiceImpl userDetailsService,
+            ContactUserDetailsService contactUserDetailsService) {
+
+        this.userDetailsService = userDetailsService;
+        this.contactUserDetailsService = contactUserDetailsService;
     }
 
     // ================= PASSWORD ENCODER =================
@@ -30,91 +32,116 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    // ================= ADMIN AUTH PROVIDER =================
+    // ================= USER AUTH PROVIDER =================
     @Bean
-    public AuthenticationProvider adminAuthProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(adminUserDetailsService);
+    public AuthenticationProvider userAuthProvider() {
+
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider();
+
+        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
+
         return provider;
     }
 
-    // ================= CUSTOMER AUTH PROVIDER =================
+    // ================= CONTACT AUTH PROVIDER =================
     @Bean
-    public AuthenticationProvider customerAuthProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(customerUserDetailsService);
+    public AuthenticationProvider contactAuthProvider() {
+
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider();
+
+        provider.setUserDetailsService(contactUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
+
         return provider;
     }
 
-    // ================= ADMIN SECURITY CHAIN =================
+    // ================= USER SECURITY CHAIN =================
     @Bean
     @Order(1)
-    public SecurityFilterChain adminSecurity(HttpSecurity http) throws Exception {
+    public SecurityFilterChain userSecurity(HttpSecurity http) throws Exception {
 
         http
-                .securityMatcher("/admin/**")
-                .authenticationProvider(adminAuthProvider())
+                .securityMatcher("/user/**")
+                .authenticationProvider(userAuthProvider())
                 .authorizeHttpRequests(auth -> auth
 
+                        // PUBLIC USER PAGES
                         .requestMatchers(
-                                "/admin/login",
-                                "/admin/process-login",
+                                "/user/login",
+                                "/user/process-login",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**"
                         ).permitAll()
 
-                        // ONLY ADMIN allowed
-                        .anyRequest().hasRole("ADMIN")
+                        // ADMIN ONLY
+                        .requestMatchers(
+                                "/user/users/**",
+                                "/user/contacts/**"
+                        ).hasRole("ADMIN")
+
+                        // ADMIN + USER
+                        .requestMatchers(
+                                "/user/dashboard",
+                                "/user/incidents"
+                        ).hasAnyRole("ADMIN", "USER")
+
+                        .anyRequest().authenticated()
                 )
+
                 .formLogin(form -> form
-                        .loginPage("/admin/login")
-                        .loginProcessingUrl("/admin/process-login")
-                        .defaultSuccessUrl("/admin/dashboard", true)
-                        .failureUrl("/admin/login?error=true")
+                        .loginPage("/user/login")
+                        .loginProcessingUrl("/user/process-login")
+                        .defaultSuccessUrl("/user/dashboard", true)
+                        .failureUrl("/user/login?error=true")
                 )
+
                 .logout(logout -> logout
-                        .logoutUrl("/admin/logout")
-                        .logoutSuccessUrl("/admin/login?logout=true")
+                        .logoutUrl("/user/logout")
+                        .logoutSuccessUrl("/user/login?logout=true")
                 )
+
                 .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
 
-    // ================= CUSTOMER SECURITY CHAIN =================
+    // ================= CONTACT SECURITY CHAIN =================
     @Bean
     @Order(2)
-    public SecurityFilterChain customerSecurity(HttpSecurity http) throws Exception {
+    public SecurityFilterChain contactSecurity(HttpSecurity http) throws Exception {
 
         http
-                .securityMatcher("/customer/**")
-                .authenticationProvider(customerAuthProvider())
+                .securityMatcher("/contact/**")
+                .authenticationProvider(contactAuthProvider())
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers(
-                                "/customer/login",
-                                "/customer/process-login",
+                                "/contact/login",
+                                "/contact/process-login",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**"
                         ).permitAll()
 
-                        // ONLY CUSTOMER allowed
-                        .anyRequest().hasRole("CUSTOMER")
+                        .anyRequest().hasRole("CONTACT")
                 )
+
                 .formLogin(form -> form
-                        .loginPage("/customer/login")
-                        .loginProcessingUrl("/customer/process-login")
-                        .defaultSuccessUrl("/customer/dashboard", true)
-                        .failureUrl("/customer/login?error=true")
+                        .loginPage("/contact/login")
+                        .loginProcessingUrl("/contact/process-login")
+                        .defaultSuccessUrl("/contact/dashboard", true)
+                        .failureUrl("/contact/login?error=true")
                 )
+
                 .logout(logout -> logout
-                        .logoutUrl("/customer/logout")
-                        .logoutSuccessUrl("/customer/login?logout=true")
+                        .logoutUrl("/contact/logout")
+                        .logoutSuccessUrl("/contact/login?logout=true")
                 )
+
                 .csrf(csrf -> csrf.disable());
 
         return http.build();

@@ -12,7 +12,9 @@ public class IncidentApiController {
 
     private final IncidentService service;
 
-    public IncidentApiController(IncidentService service) {
+    public IncidentApiController(
+            IncidentService service) {
+
         this.service = service;
     }
 

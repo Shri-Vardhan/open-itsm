@@ -9,8 +9,8 @@ configurations.all {
 dependencies {
     implementation project(':service-incident')
     implementation project(':service-problem')
-    implementation project(':service-admin')
-    implementation project(':service-customer')
+    implementation project(':service-user')
+    implementation project(':service-contact')
     implementation project(':common')
 
     implementation 'org.springframework.boot:spring-boot-starter'
