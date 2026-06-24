@@ -1,12 +1,5 @@
 plugins {
-    id 'java'
-}
-
-group = 'com.openitsm'
-version = '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+    id 'java-library'
 }
 
 dependencies {
@@ -14,8 +7,4 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.apache.logging.log4j:log4j-api'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-}
-
-test {
-    useJUnitPlatform()
 }
