@@ -8,6 +8,6 @@ public class ContactAuthController {
 
     @GetMapping("/contact/login")
     public String login() {
-        return "login/contact-login";
+        return "contact/contact-login";
     }
 }

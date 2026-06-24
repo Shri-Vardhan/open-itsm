@@ -8,45 +8,36 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImpl
-        implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository repository;
 
-    public UserDetailsServiceImpl(
-            UserRepository repository) {
-
+    public UserDetailsServiceImpl(UserRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(
-            String username)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        User user =
-                repository.findByUsername(username)
-                        .orElseThrow(() ->
-                                new UsernameNotFoundException(
-                                        "User not found"));
+        User user = repository.findByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found: " + username));
 
         String role = user.getRole();
 
-        if (!role.startsWith("ROLE_")) {
+        if (role == null) {
+            role = "ROLE_USER";
+        } else if (!role.startsWith("ROLE_")) {
             role = "ROLE_" + role;
         }
 
-        return org.springframework.security
-                .core.userdetails.User
+        return org.springframework.security.core.userdetails.User
                 .builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .authorities(role)
-                .disabled(
-                        !"Y".equalsIgnoreCase(
-                                user.getEnabled()
-                        )
-                )
+                .disabled(!"Y".equalsIgnoreCase(user.getEnabled()))
                 .build();
     }
 }

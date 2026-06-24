@@ -7,6 +7,12 @@ import jakarta.persistence.*;
 public class Incident {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "incident_seq")
+    @SequenceGenerator(
+            name = "incident_seq",
+            sequenceName = "ITSM_INCIDENT_SEQ",
+            allocationSize = 1
+    )
     @Column(name = "INCIDENT_ID")
     private Long id;
 

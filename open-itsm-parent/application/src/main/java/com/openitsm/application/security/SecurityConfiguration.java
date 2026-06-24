@@ -26,14 +26,12 @@ public class SecurityConfiguration {
         this.contactUserDetailsService = contactUserDetailsService;
     }
 
-    // ================= PASSWORD ENCODER =================
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ================= USER AUTH PROVIDER =================
-    @Bean
+    @Bean("userAuthProvider")
     public AuthenticationProvider userAuthProvider() {
 
         DaoAuthenticationProvider provider =
@@ -45,8 +43,7 @@ public class SecurityConfiguration {
         return provider;
     }
 
-    // ================= CONTACT AUTH PROVIDER =================
-    @Bean
+    @Bean("contactAuthProvider")
     public AuthenticationProvider contactAuthProvider() {
 
         DaoAuthenticationProvider provider =
@@ -58,17 +55,17 @@ public class SecurityConfiguration {
         return provider;
     }
 
-    // ================= USER SECURITY CHAIN =================
     @Bean
     @Order(1)
-    public SecurityFilterChain userSecurity(HttpSecurity http) throws Exception {
+    public SecurityFilterChain userSecurity(
+            HttpSecurity http,
+            @org.springframework.beans.factory.annotation.Qualifier("userAuthProvider")
+            AuthenticationProvider userAuthProvider) throws Exception {
 
         http
                 .securityMatcher("/user/**")
-                .authenticationProvider(userAuthProvider())
+                .authenticationProvider(userAuthProvider)
                 .authorizeHttpRequests(auth -> auth
-
-                        // PUBLIC USER PAGES
                         .requestMatchers(
                                 "/user/login",
                                 "/user/process-login",
@@ -76,49 +73,41 @@ public class SecurityConfiguration {
                                 "/js/**",
                                 "/images/**"
                         ).permitAll()
-
-                        // ADMIN ONLY
                         .requestMatchers(
                                 "/user/users/**",
                                 "/user/contacts/**"
-                        ).hasRole("ADMIN")
-
-                        // ADMIN + USER
+                        ).hasAnyRole("ADMIN", "USER")
                         .requestMatchers(
                                 "/user/dashboard",
                                 "/user/incidents"
                         ).hasAnyRole("ADMIN", "USER")
-
                         .anyRequest().authenticated()
                 )
-
                 .formLogin(form -> form
                         .loginPage("/user/login")
                         .loginProcessingUrl("/user/process-login")
                         .defaultSuccessUrl("/user/dashboard", true)
                         .failureUrl("/user/login?error=true")
                 )
-
                 .logout(logout -> logout
                         .logoutUrl("/user/logout")
                         .logoutSuccessUrl("/user/login?logout=true")
-                )
-
-                .csrf(csrf -> csrf.disable());
+                );
 
         return http.build();
     }
 
-    // ================= CONTACT SECURITY CHAIN =================
     @Bean
     @Order(2)
-    public SecurityFilterChain contactSecurity(HttpSecurity http) throws Exception {
+    public SecurityFilterChain contactSecurity(
+            HttpSecurity http,
+            @org.springframework.beans.factory.annotation.Qualifier("contactAuthProvider")
+            AuthenticationProvider contactAuthProvider) throws Exception {
 
         http
                 .securityMatcher("/contact/**")
-                .authenticationProvider(contactAuthProvider())
+                .authenticationProvider(contactAuthProvider)
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers(
                                 "/contact/login",
                                 "/contact/process-login",
@@ -126,23 +115,18 @@ public class SecurityConfiguration {
                                 "/js/**",
                                 "/images/**"
                         ).permitAll()
-
                         .anyRequest().hasRole("CONTACT")
                 )
-
                 .formLogin(form -> form
                         .loginPage("/contact/login")
                         .loginProcessingUrl("/contact/process-login")
                         .defaultSuccessUrl("/contact/dashboard", true)
                         .failureUrl("/contact/login?error=true")
                 )
-
                 .logout(logout -> logout
                         .logoutUrl("/contact/logout")
                         .logoutSuccessUrl("/contact/login?logout=true")
-                )
-
-                .csrf(csrf -> csrf.disable());
+                );
 
         return http.build();
     }
