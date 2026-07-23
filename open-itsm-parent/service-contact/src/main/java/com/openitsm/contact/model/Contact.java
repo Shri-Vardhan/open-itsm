@@ -3,20 +3,20 @@ package com.openitsm.contact.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "CUSTOMERS")
+@Table(name = "CONTACT")
 public class Contact {
 
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "customer_seq"
+            generator = "contact_seq"
     )
     @SequenceGenerator(
-            name = "customer_seq",
-            sequenceName = "CUSTOMER_SEQ",
+            name = "contact_seq",
+            sequenceName = "CONTACT_SEQ",
             allocationSize = 1
     )
-    @Column(name = "CUSTOMER_ID")
+    @Column(name = "CONTACT_ID")
     private Long id;
 
     @Column(

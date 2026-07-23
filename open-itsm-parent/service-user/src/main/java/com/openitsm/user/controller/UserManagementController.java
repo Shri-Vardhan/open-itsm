@@ -22,13 +22,11 @@ public class UserManagementController {
     @PostMapping("/create")
     public String create(
             @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestParam("role") String role) {
+            @RequestParam("password") String password) {
 
         service.createUser(
                 username,
-                password,
-                role
+                password
         );
 
         return "redirect:/user/dashboard";
