@@ -17,7 +17,6 @@ The system is designed with a layered and modular architecture to support scalab
 - Provide a foundation for IT workflow automation and future ITSM capabilities
 
 ---
-
 ## Core ITSM Capabilities
 
 ### Incident Management

@@ -25,9 +25,6 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "ROLE")
-    private String role;
-
     @Column(name = "ENABLED")
     private String enabled;
 
@@ -37,13 +34,11 @@ public class User {
     public User(Long userId,
                 String username,
                 String password,
-                String role,
                 String enabled) {
 
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.role = role;
         this.enabled = enabled;
     }
 
@@ -69,14 +64,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getEnabled() {

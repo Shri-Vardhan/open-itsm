@@ -3,7 +3,7 @@ package com.openitsm.contact.service;
 import com.openitsm.contact.model.Contact;
 import com.openitsm.contact.repository.ContactRepository;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ContactService {
 
     private final ContactRepository repository;
-    private final PasswordEncoder encoder;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public ContactService(ContactRepository repository,
-                          PasswordEncoder encoder) {
+    public ContactService(ContactRepository repository) {
         this.repository = repository;
-        this.encoder = encoder;
     }
 
     @Transactional
@@ -33,7 +31,7 @@ public class ContactService {
 
         Contact contact = new Contact();
         contact.setUsername(username);
-        contact.setPassword(encoder.encode(password));
+        contact.setPassword(passwordEncoder.encode(password));
         contact.setEnabled("Y");
 
         try {
@@ -41,5 +39,23 @@ public class ContactService {
         } catch (DataIntegrityViolationException e) {
             throw new IllegalArgumentException("Contact already exists");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public boolean authenticate(String username,
+                                String password) {
+
+        if (username == null || username.isBlank()) {
+            return false;
+        }
+
+        if (password == null || password.isBlank()) {
+            return false;
+        }
+
+        return repository.findByUsername(username.trim())
+                .filter(Contact::isEnabledFlag)
+                .map(contact -> passwordEncoder.matches(password, contact.getPassword()))
+                .orElse(false);
     }
 }

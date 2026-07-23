@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user/contacts")
-public class UserContactController {
+public class ContactManagementController {
 
     private final ContactService service;
 
-    public UserContactController(
+    public ContactManagementController(
             ContactService service) {
 
         this.service = service;
