@@ -9,6 +9,7 @@ dependencies {
     implementation project(':service-incident')
     implementation project(':service-problem')
     implementation project(':service-user')
+    implementation project(':service-security')
     implementation project(':service-contact')
     implementation project(':common')
 
